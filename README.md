@@ -27,12 +27,12 @@
 
 ```
 # Clone this repository
-git clone https://github.com/vinhquyen-lee/FLOL.git
-cd FLOL
+git clone https://github.com/vinhquyen-lee/FLOL-Detection.git
+cd FLOL-Detection
 
 # Create python environment and activate it
-python3 -m venv venv_FLOL
-source venv_FLOL/bin/activate
+python3 -m venv venv_FLOL-Detection
+source venv_FLOL-Detection/bin/activate
 
 # Install python dependencies
 pip install -r requirements.txt
