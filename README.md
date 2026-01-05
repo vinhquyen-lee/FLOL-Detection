@@ -1,14 +1,12 @@
-# FLOL: Fast Baselines for Real-World Low-Light Enhancement
+## FLOL-Detection: Real-Time Low-Light Enhancement with Object Detection
+**Based on the original work "FLOL: Fast Baselines for Real-World Low-Light Enhancement" by** **[Juan C. Benito](https://scholar.google.com/citations?hl=en&user=f186MIUAAAAJ), [Daniel Feijoo](https://scholar.google.com/citations?hl=en&user=hqbPn4YAAAAJ), [Alvaro Garcia](https://scholar.google.com/citations?hl=en&user=c6SJPnMAAAAJ), [Marcos V. Conde](https://scholar.google.com/citations?user=NtB1kjYAAAAJ&hl=en)** (CIDAUT AI  and University of Würzburg)
 
-[![Hugging Face](https://img.shields.io/badge/Demo-%F0%9F%A4%97%20Hugging%20Face-blue)](https://huggingface.co/spaces/Cidaut/FLOL) 
-[![paper](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/2501.09718)
+**Project Update:** This repository extends the original FLOL framework, which focused on single-image enhancement, to support real-time video processing and webcam streams. Additionally, we integrated a YOLO11n object detection model to perform detection on the enhanced low-light frames. This allows for robust object detection even in dark environments where standard detectors typically fail.
 
-**[Juan C. Benito](https://scholar.google.com/citations?hl=en&user=f186MIUAAAAJ), [Daniel Feijoo](https://scholar.google.com/citations?hl=en&user=hqbPn4YAAAAJ), [Alvaro Garcia](https://scholar.google.com/citations?hl=en&user=c6SJPnMAAAAJ), [Marcos V. Conde](https://scholar.google.com/citations?user=NtB1kjYAAAAJ&hl=en)** (CIDAUT AI  and University of Würzburg)
-
-
-
-> **Abstract:**
-> Low-Light Image Enhancement (LLIE) is a key task in computational photography and imaging. The problem of enhancing images captured during night or in dark environments has been well-studied in the image signal processing literature.  However, current deep learning-based solutions struggle with efficiency and robustness in real-world scenarios (e.g. scenes with noise, saturated pixels, bad illumination). We propose a lightweight neural network that combines image processing in the frequency and spatial domains. Our method, FLOL+, is one of the fastest models for this task, achieving state-of-the-art results on popular real scenes datasets such as LOL and LSRW. Moreover, we are able to process 1080p images under 12ms. Our code and models will be open-source.
+🚀 **New Features**
+- Video Inference: Enhance low-light videos frame-by-frame with high temporal consistency.
+- Webcam Demo: Real-time enhancement and detection using your computer's webcam.
+- Object Detection: Integrated YOLO11n model to detect objects directly on enhanced frames.
 
 | <img src="images/teaser/425_UHD_LL.JPG" alt="add" width="450"> | <img src="images/teaser/425_UHD_LL.png" alt="add" width="450"> | <img src="images/teaser/425_FLOL+.JPG" alt="add" width="450"> |
 |:-------------------------:|:-------------------------:|:-------------------------:|
@@ -29,7 +27,7 @@
 
 ```
 # Clone this repository
-git clone https://github.com/cidautai/FLOL.git
+git clone https://github.com/vinhquyen-lee/FLOL.git
 cd FLOL
 
 # Create python environment and activate it
@@ -63,6 +61,10 @@ The datasets used for training and/or evaluation are:
 
 You can download LOLv2-Real and UHD-LL datasets and put them on the `/datasets` folder for testing. 
 
+**Detection Dataset**
+For the object detection task, the YOLO11n model was trained on a dataset:
+[Obstacle Detection Computer Vision Dataset](https://universe.roboflow.com/aden-workspace/obstacle-detection-ttv7t)
+
 ## ✏️ **Results**
 We present results in different datasets for FLOL+.
 
@@ -80,7 +82,20 @@ To check our results you could run the evaluation of FLOL in each of the dataset
 
 - Run ```python lpips_metric.py  -g /LSRW_GroundTruthImages_path -p /LSRW_predictedimages -e .jpg``` on your terminal to obtain LPIPS value. (LSRW predicted images are obtained by using LOLv2-Real weight file)
 
-## 🚀 **Inference**
+**🎥 Video & Webcam Inference**
+We provide new scripts to run inference on video files and live webcam streams.
+
+**1. Video Inference**
+To process a video file (enhance + detect), use the video_inference.py script:
+- Run ``` python video_inference.py ```
+ 
+**2. Webcam Demo**
+To run real-time enhancement and detection on your webcam:
+- Run ``` python webcam_demo.py ```
+- 
+Press q to quit the stream.
+
+## 🚀 **Image Inference**
 You can process the entire set of test images of provided datasets by running: 
 
 - Run ```python inference.py --config ./options/LOLv2-Real.yml``` (UHD-LL is set by default)
@@ -109,10 +124,5 @@ Processed images will be saved in `./results/dataset_selected/`.
 | <img src="images/gallery/UHD_LL/1791_INPUT.JPG" alt="add" width="250"> | <img src="images/gallery/UHD_LL/1791_UHDFour.png" alt="add" width="250"> | <img src="images/gallery/UHD_LL/1791_FLOL.JPG" alt="add" width="250"> | <img src="images/gallery/UHD_LL/1791_GT.JPG" alt="add" width="250"> |
 | Input | UHDFour | **FLOL** (ours) | Ground Truth|
 
-## 🎫 License 
 
-This work is licensed under the MIT License.
 
-## 📢 Contact 
-
-If you have any questions, please contact juaben@cidaut.es and marcos.conde@uni-wuerzburg.de
