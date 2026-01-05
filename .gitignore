@@ -1,1 +1,5 @@
 venv_FLOL/
+__pycache__/
+*.pyc
+datasets/
+results/
