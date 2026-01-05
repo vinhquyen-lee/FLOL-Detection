@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 datasets/
 results/
+
+best.pt
+last.pt
